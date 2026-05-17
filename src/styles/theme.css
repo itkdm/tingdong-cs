@@ -1,0 +1,65 @@
+:root,
+:root[data-theme='tactical-board'] {
+	color-scheme: light;
+	font-family: 'Noto Sans SC', sans-serif;
+	--page-max-width: 1180px;
+	--radius-card: 8px;
+	--radius-control: 8px;
+	--radius-brand: 8px;
+
+	--bg-page: #f4f0e6;
+	--bg-page-top-glow: rgba(201, 79, 61, 0.14);
+	--bg-page-start: #f7f2e8;
+	--bg-page-middle: #f1ebde;
+	--bg-page-end: #e7dfd2;
+
+	--text-main: rgba(31, 37, 43, 0.96);
+	--text-muted: rgba(67, 76, 84, 0.78);
+	--text-strong: #20262a;
+	--text-heading: #22292d;
+	--text-inverse: #fff9f0;
+	--text-overlay: rgba(245, 241, 232, 0.9);
+
+	--nav-text: rgba(67, 76, 84, 0.86);
+	--nav-hover: #9f3b2d;
+	--nav-bg: transparent;
+	--nav-bg-hover: rgba(201, 79, 61, 0.1);
+	--nav-text-active: #9f3b2d;
+	--header-bg: transparent;
+	--header-border: transparent;
+	--header-shadow: none;
+	--header-scrolled-bg: rgba(255, 251, 245, 0.38);
+	--header-scrolled-bg-end: rgba(255, 251, 245, 0);
+	--header-scrolled-border: transparent;
+	--header-scrolled-shadow: none;
+	--logo-bg: rgba(255, 251, 245, 0.92);
+	--logo-border: rgba(104, 115, 95, 0.24);
+
+	--surface-card: rgba(255, 251, 245, 0.94);
+	--surface-card-alt: rgba(241, 235, 222, 0.92);
+	--surface-control: rgba(255, 251, 245, 0.7);
+	--surface-media-top: rgba(244, 240, 230, 0.08);
+	--surface-media-bottom: rgba(31, 37, 43, 0.72);
+	--hero-character-fade: rgba(244, 240, 230, 0.68);
+
+	--border-subtle: rgba(104, 115, 95, 0.18);
+	--border-soft: rgba(104, 115, 95, 0.16);
+	--border-strong: rgba(104, 115, 95, 0.24);
+
+	--accent: #c94f3d;
+	--accent-strong: #9f3b2d;
+	--accent-end: #a74131;
+	--accent-contrast: #fffaf2;
+	--accent-soft: rgba(201, 79, 61, 0.12);
+
+	--shadow-card: 0 24px 70px rgba(41, 33, 26, 0.12);
+	--shadow-brand: rgba(159, 59, 45, 0.22);
+	--shadow-button: rgba(169, 65, 49, 0.18);
+	--shadow-bullet: rgba(201, 79, 61, 0.28);
+	--shadow-avatar: rgba(49, 35, 23, 0.2);
+
+	--avatar-border: rgba(255, 245, 232, 0.8);
+	--hero-image-overlay-start: rgba(244, 240, 230, 0.78);
+	--hero-image-overlay-end: rgba(231, 223, 210, 0.82);
+	--meta-muted: rgba(84, 91, 74, 0.82);
+}

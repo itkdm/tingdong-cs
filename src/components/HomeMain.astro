@@ -1,0 +1,32 @@
+---
+import { learningMethods, previewEpisodes } from '../data/home';
+---
+
+<section class="method-section" id="topics">
+	<p class="section-kicker">How It Works</p>
+	<div class="method-grid">
+		{learningMethods.map((item) => (
+			<article class="method-card">
+				<p class="card-kicker">{item.kicker}</p>
+				<h3>{item.title}</h3>
+				<p>{item.description}</p>
+			</article>
+		))}
+	</div>
+</section>
+
+<section class="episodes-section" id="episodes">
+	<p class="section-kicker">Latest Episodes</p>
+	<div class="episodes-grid">
+		{previewEpisodes.map((episode) => (
+			<article class="episode-card">
+				<div class="episode-header">
+					<span class="episode-id">{episode.id}</span>
+					<span class="episode-tag">{episode.tag}</span>
+				</div>
+				<h3>{episode.title}</h3>
+				<p>{episode.description}</p>
+			</article>
+		))}
+	</div>
+</section>

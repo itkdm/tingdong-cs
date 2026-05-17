@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/shell.css';
+---
+
+<Layout
+	title="关于 | 听懂CS"
+	description="了解听懂CS的初衷和学习方法，用真实比赛片段学地道电竞英语。"
+>
+	<div class="page-shell">
+		<SiteHeader />
+		<main class="page-main">
+			<div class="page-container">
+				<header class="page-header">
+					<p class="page-kicker">About</p>
+					<h1>关于听懂CS</h1>
+					<p class="page-intro">兴趣是最好的老师，用真实比赛片段学地道表达。</p>
+				</header>
+
+				<section class="content-section">
+					<h2>我们的初衷</h2>
+					<p>听懂CS 致力于帮助 CS 玩家和学习者通过真实的比赛解说片段，掌握电竞英语和日常表达。我们相信，兴趣驱动的学习更高效。</p>
+				</section>
+
+				<section class="content-section">
+					<h2>学习方法</h2>
+					<p>先听真实语境，再拆解表达，最后通过笔记反复回顾。三步走，让学习更系统。</p>
+				</section>
+
+				<section class="content-section">
+					<h2>联系我们</h2>
+					<p>如果你有任何问题或建议，欢迎通过网站底部提供的方式与我们联系。</p>
+				</section>
+			</div>
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>

@@ -1,0 +1,11 @@
+---
+import { footerLegal } from '../data/home';
+---
+
+<footer class="site-footer" id="site-footer">
+	<div class="footer-legal" aria-label="版权与备案信息">
+		<span>{footerLegal.copyright}</span>
+		<span aria-hidden="true">·</span>
+		<a href={footerLegal.icpHref} target="_blank" rel="noopener noreferrer">{footerLegal.icp}</a>
+	</div>
+</footer>

@@ -1,23 +1,42 @@
+---
+import '../styles/theme.css';
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	theme?: 'tactical-board';
+}
+
+const {
+	title = '听懂CS | 用真实比赛学地道电竞英语',
+	description = '用 CS2 / CSGO 真实解说片段，学习电竞英语、日常表达、单词、句式和语法。',
+	theme = 'tactical-board',
+} = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN" data-theme={theme}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
+		<link rel="shortcut icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#f4f0e6" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Teko:wght@500;700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

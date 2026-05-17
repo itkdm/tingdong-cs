@@ -1,0 +1,197 @@
+.hero {
+	max-width: var(--page-max-width);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+	gap: 72px;
+	align-items: center;
+	min-height: 680px;
+	padding: 84px 24px 86px;
+}
+
+.eyebrow,
+.section-kicker,
+.card-kicker,
+.episode-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--accent-strong);
+	font-size: 0.76rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.hero h1 {
+	max-width: 12ch;
+	margin: 20px 0 18px;
+	color: var(--text-strong);
+	font-size: 5.4rem;
+	font-weight: 900;
+	letter-spacing: 0;
+	line-height: 0.98;
+}
+
+.hero-text {
+	max-width: 58ch;
+	color: var(--text-muted);
+	font-size: 1.12rem;
+	line-height: 1.8;
+}
+
+.hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	margin-top: 34px;
+}
+
+.button {
+	padding: 14px 20px;
+	border: 1px solid transparent;
+	border-radius: var(--radius-control);
+	font-size: 0.96rem;
+	font-weight: 700;
+	transition:
+		transform 180ms ease,
+		border-color 180ms ease,
+		background 180ms ease;
+}
+
+.button:hover {
+	transform: translateY(-2px);
+}
+
+.button-primary {
+	color: var(--accent-contrast);
+	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-end) 100%);
+	box-shadow: 0 16px 36px var(--shadow-button);
+}
+
+.button-secondary {
+	border-color: var(--border-strong);
+	background: var(--surface-control);
+}
+
+.hero-visual {
+	position: relative;
+	min-height: 390px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	overflow: visible;
+}
+
+.hero-character {
+	width: min(100%, 560px);
+	height: auto;
+	min-height: 390px;
+	object-fit: contain;
+	filter: saturate(1.03) contrast(1.02);
+}
+
+.method-grid,
+.episodes-grid {
+	display: grid;
+	gap: 18px;
+}
+
+.method-card,
+.episode-card {
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-card);
+	background: linear-gradient(180deg, var(--surface-card), var(--surface-card-alt));
+	box-shadow: var(--shadow-card);
+	backdrop-filter: blur(18px);
+	padding: 22px;
+}
+
+.episode-id {
+	color: var(--accent);
+	font-family: 'Teko', sans-serif;
+	font-size: 2rem;
+	letter-spacing: 0.04em;
+	line-height: 1;
+}
+
+.episode-card h3,
+.method-card h3 {
+	margin: 10px 0 8px;
+	color: var(--text-heading);
+	font-size: 1.15rem;
+}
+
+.episode-card p,
+.method-card p {
+	margin: 0;
+	color: var(--text-muted);
+	line-height: 1.75;
+}
+
+section {
+	padding-top: 36px;
+}
+
+.section-kicker {
+	margin: 0 0 16px;
+}
+
+.method-grid {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.episodes-grid {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.episode-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+@media (max-width: 1040px) {
+	.hero,
+	.method-grid,
+	.episodes-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.hero h1 {
+		max-width: 100%;
+	}
+
+	.hero {
+		gap: 42px;
+		min-height: auto;
+		padding-top: 64px;
+		padding-bottom: 72px;
+	}
+}
+
+@media (max-width: 720px) {
+	.hero {
+		gap: 32px;
+		padding: 48px 18px 56px;
+	}
+
+	.hero h1 {
+		font-size: 3.4rem;
+	}
+
+	.method-card,
+	.episode-card {
+		padding: 22px;
+	}
+
+	.hero-visual {
+		min-height: 260px;
+	}
+
+	.hero-character {
+		width: min(100%, 380px);
+		min-height: 260px;
+	}
+}

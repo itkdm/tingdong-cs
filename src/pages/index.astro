@@ -1,11 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import HomeHero from '../components/HomeHero.astro';
+import HomeMain from '../components/HomeMain.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { homeMeta } from '../data/home';
+import '../styles/shell.css';
+import '../styles/home.css';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={homeMeta.title} description={homeMeta.description}>
+	<div id="top" class="page-shell" style={`--hero-bg-image: url(${import.meta.env.BASE_URL}images/hero-bg.png);`}>
+		<SiteHeader />
+		<HomeHero />
+		<main class="home-main">
+			<HomeMain />
+		</main>
+		<SiteFooter />
+	</div>
 </Layout>
