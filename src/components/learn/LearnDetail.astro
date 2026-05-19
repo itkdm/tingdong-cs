@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import type { LearnNavItem } from '../../data/learn';
+import type { QuizQuestion } from '../../lib/quiz';
 import { formatSubtitleTime, type SubtitleLine } from '../../lib/srt';
 
 interface Props {
@@ -10,13 +11,18 @@ interface Props {
 	embedSrc?: string;
 	memoryImages: ImageMetadata[];
 	subtitles: SubtitleLine[];
+	intensiveHtml?: string;
+	quizQuestions?: QuizQuestion[];
 	relatedItems?: LearnNavItem[];
 	previousItem?: LearnNavItem;
 	nextItem?: LearnNavItem;
 }
 
-const { entry, embedSrc, memoryImages, subtitles, relatedItems = [], previousItem, nextItem } = Astro.props;
+const { entry, embedSrc, memoryImages, subtitles, intensiveHtml = '', quizQuestions = [], relatedItems = [], previousItem, nextItem } = Astro.props;
 const { Content } = await render(entry);
+const hasIntensive = Boolean(intensiveHtml);
+const hasQuiz = quizQuestions.length > 0;
+const notesActive = !hasIntensive;
 ---
 
 <article class="learn-detail">
@@ -71,15 +77,49 @@ const { Content } = await render(entry);
 
 	<section class="detail-tabs" aria-label="学习资料">
 		<div class="tab-list" role="tablist" aria-label="学习资料切换">
-			<button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="notes-panel" data-tab-target="notes-panel">
+			{
+				hasIntensive ? (
+					<button
+						class="tab-button is-active"
+						type="button"
+						role="tab"
+						aria-selected="true"
+						aria-controls="intensive-panel"
+						data-tab-target="intensive-panel"
+					>
+						文本精读
+					</button>
+				) : null
+			}
+			<button
+				class={`tab-button ${notesActive ? 'is-active' : ''}`}
+				type="button"
+				role="tab"
+				aria-selected={String(notesActive)}
+				aria-controls="notes-panel"
+				data-tab-target="notes-panel"
+			>
 				学习笔记
 			</button>
+			{
+				hasQuiz ? (
+					<button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="quiz-panel" data-tab-target="quiz-panel">
+						学习检测
+					</button>
+				) : null
+			}
 			<button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="memory-panel" data-tab-target="memory-panel">
 				记忆图
 			</button>
 		</div>
 
-		<section class="tab-panel notes-panel is-active" id="notes-panel" role="tabpanel">
+		{
+			hasIntensive ? (
+				<section class="tab-panel intensive-panel is-active" id="intensive-panel" role="tabpanel" set:html={intensiveHtml} />
+			) : null
+		}
+
+		<section class={`tab-panel notes-panel ${notesActive ? 'is-active' : ''}`} id="notes-panel" role="tabpanel" hidden={!notesActive}>
 			{
 				entry.data.summary ? (
 					<section class="expression-summary" aria-label="核心表达速记">
@@ -89,8 +129,73 @@ const { Content } = await render(entry);
 				) : null
 			}
 			<Content />
+		</section>
+
+		{
+			hasQuiz ? (
+				<section class="tab-panel quiz-panel" id="quiz-panel" role="tabpanel" hidden>
+					<div class="quiz-intro">
+						<h2>学习检测</h2>
+						<p>看完笔记后，用几道题检查自己是不是真的理解、会判断、能迁移。</p>
+					</div>
+					<div class="quiz-list">
+						{quizQuestions.map((question, index) => (
+							<article
+								class="quiz-card"
+								data-quiz-question
+								data-quiz-type={question.type}
+								data-quiz-answers={JSON.stringify(question.answers)}
+							>
+								<div class="quiz-card-heading">
+									<span>{String(index + 1).padStart(2, '0')}</span>
+									<small>{question.section}</small>
+								</div>
+								<h3 set:html={question.promptHtml} />
+								{question.type === 'choice' ? (
+									<div class="quiz-options" role="group" aria-label="选择答案">
+										{question.options.map((option) => (
+											<button class="quiz-option" type="button" data-quiz-option={option.key}>
+												<strong>{option.key}</strong>
+												<span set:html={option.labelHtml} />
+											</button>
+										))}
+									</div>
+								) : (
+									<div class="quiz-blank">
+										<input type="text" data-quiz-input placeholder="输入你的答案" aria-label="填写答案" />
+										<button class="quiz-check" type="button" data-quiz-check>
+											检查答案
+										</button>
+									</div>
+								)}
+								<p class="quiz-feedback" data-quiz-feedback aria-live="polite" />
+								<p class="quiz-explanation" data-quiz-explanation hidden set:html={question.explanationHtml} />
+							</article>
+						))}
+					</div>
+				</section>
+			) : null
+		}
+
+		<section class="tab-panel memory-panel" id="memory-panel" role="tabpanel" hidden>
 			{
-				relatedItems.length > 0 ? (
+				memoryImages.length > 0 ? (
+					memoryImages.map((image, index) => (
+						<figure class="memory-card">
+							<img src={image.src} width={image.width} height={image.height} alt={`${entry.data.title} 记忆图 ${index + 1}`} loading="lazy" />
+						</figure>
+					))
+				) : (
+					<p class="empty-state">本期记忆图正在整理中。</p>
+				)
+			}
+		</section>
+	</section>
+
+	{
+		relatedItems.length > 0 || previousItem || nextItem ? (
+			<aside class="detail-related" aria-label="继续学习">
+				{relatedItems.length > 0 ? (
 					<section class="learn-link-section" aria-label="相关学习">
 						<h2>相关学习</h2>
 						<div class="learn-link-grid">
@@ -99,10 +204,8 @@ const { Content } = await render(entry);
 							))}
 						</div>
 					</section>
-				) : null
-			}
-			{
-				previousItem || nextItem ? (
+				) : null}
+				{previousItem || nextItem ? (
 					<nav class="learn-pagination" aria-label="上一篇和下一篇">
 						{previousItem ? (
 							<a href={`/learn/${previousItem.slug}/`}>
@@ -121,24 +224,10 @@ const { Content } = await render(entry);
 							<span />
 						)}
 					</nav>
-				) : null
-			}
-		</section>
-
-		<section class="tab-panel memory-panel" id="memory-panel" role="tabpanel" hidden>
-			{
-				memoryImages.length > 0 ? (
-					memoryImages.map((image, index) => (
-						<figure class="memory-card">
-							<img src={image.src} width={image.width} height={image.height} alt={`${entry.data.title} 记忆图 ${index + 1}`} loading="lazy" />
-						</figure>
-					))
-				) : (
-					<p class="empty-state">本期记忆图正在整理中。</p>
-				)
-			}
-		</section>
-	</section>
+				) : null}
+			</aside>
+		) : null
+	}
 </article>
 
 <script>

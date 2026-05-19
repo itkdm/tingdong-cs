@@ -230,25 +230,224 @@
 	line-height: 1.8;
 }
 
+.intensive-panel,
+.quiz-panel {
+	color: var(--text-main);
+	line-height: 1.8;
+}
+
 .notes-panel h2,
-.notes-panel h3 {
+.notes-panel h3,
+.intensive-panel h2,
+.intensive-panel h3,
+.quiz-panel h2,
+.quiz-panel h3 {
 	color: var(--text-heading);
 	line-height: 1.35;
 }
 
 .notes-panel p,
-.notes-panel ul {
+.notes-panel ul,
+.intensive-panel p,
+.intensive-panel ul,
+.quiz-panel p {
 	margin: 14px 0;
 }
 
-.notes-panel code {
+.notes-panel code,
+.intensive-panel code,
+.quiz-panel code {
 	color: var(--accent-strong);
 	font-weight: 700;
 }
 
-.expression-summary,
-.learn-link-section,
-.learn-pagination {
+.intensive-panel h2 {
+	margin-top: 28px;
+	padding-top: 22px;
+	border-top: 1px solid var(--border-soft);
+	font-size: 1.22rem;
+}
+
+.intensive-panel h2:first-child {
+	margin-top: 0;
+	padding-top: 0;
+	border-top: 0;
+}
+
+.intensive-panel blockquote {
+	margin: 14px 0;
+	padding: 14px 16px;
+	border: 1px solid var(--border-subtle);
+	border-left: 4px solid var(--accent);
+	border-radius: var(--radius-control);
+	color: var(--text-heading);
+	background: var(--surface-control);
+}
+
+.intensive-panel blockquote p {
+	margin: 0;
+	font-size: 1.02rem;
+	font-weight: 800;
+	line-height: 1.7;
+}
+
+.intensive-panel li {
+	margin: 8px 0;
+	color: var(--text-muted);
+}
+
+.quiz-intro {
+	margin-bottom: 18px;
+	padding-bottom: 18px;
+	border-bottom: 1px solid var(--border-soft);
+}
+
+.quiz-intro h2 {
+	margin: 0 0 8px;
+	font-size: 1.18rem;
+}
+
+.quiz-intro p {
+	margin: 0;
+	color: var(--text-muted);
+}
+
+.quiz-list {
+	display: grid;
+	gap: 0;
+}
+
+.quiz-card {
+	padding: 22px 0;
+	border-top: 1px solid var(--border-soft);
+	background: transparent;
+	box-shadow: none;
+}
+
+.quiz-card:first-child {
+	padding-top: 0;
+	border-top: 0;
+}
+
+.quiz-card-heading {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 10px;
+	color: var(--text-muted);
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.quiz-card-heading span {
+	color: var(--accent-strong);
+	font-size: 1.12rem;
+}
+
+.quiz-card-heading small {
+	font-size: 0.76rem;
+}
+
+.quiz-card h3 {
+	margin: 0 0 14px;
+	font-size: 1.05rem;
+}
+
+.quiz-options {
+	display: grid;
+	gap: 10px;
+}
+
+.quiz-option {
+	display: grid;
+	grid-template-columns: 34px minmax(0, 1fr);
+	gap: 10px;
+	align-items: center;
+	width: 100%;
+	padding: 11px 12px;
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-control);
+	color: var(--text-main);
+	font: inherit;
+	text-align: left;
+	background: var(--surface-control);
+	cursor: pointer;
+}
+
+.quiz-option:hover,
+.quiz-option.is-selected {
+	border-color: var(--border-strong);
+	background: var(--accent-soft);
+}
+
+.quiz-option strong {
+	display: grid;
+	place-items: center;
+	width: 28px;
+	height: 28px;
+	border-radius: 999px;
+	color: var(--text-inverse);
+	background: var(--accent);
+	font-size: 0.82rem;
+}
+
+.quiz-blank {
+	display: flex;
+	gap: 10px;
+}
+
+.quiz-blank input {
+	flex: 1;
+	min-width: 0;
+	padding: 11px 12px;
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-control);
+	color: var(--text-main);
+	font: inherit;
+	background: var(--surface-control);
+}
+
+.quiz-blank input:focus {
+	outline: 2px solid var(--border-strong);
+	outline-offset: 2px;
+}
+
+.quiz-check {
+	flex: 0 0 auto;
+	padding: 0 14px;
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-control);
+	color: var(--nav-text-active);
+	font: inherit;
+	font-weight: 800;
+	background: var(--nav-bg-hover);
+	cursor: pointer;
+}
+
+.quiz-feedback {
+	margin: 12px 0 0;
+	font-weight: 800;
+}
+
+.quiz-card.is-correct .quiz-feedback {
+	color: var(--accent-strong);
+}
+
+.quiz-card.is-wrong .quiz-feedback {
+	color: var(--text-heading);
+}
+
+.quiz-explanation {
+	margin: 8px 0 0;
+	padding: 12px 14px;
+	border-left: 4px solid var(--accent);
+	border-radius: var(--radius-control);
+	color: var(--text-muted);
+	background: var(--surface-control);
+}
+
+.expression-summary {
 	margin-top: 24px;
 	padding-top: 20px;
 	border-top: 1px solid var(--border-soft);
@@ -270,6 +469,23 @@
 .expression-summary p {
 	margin: 0;
 	color: var(--text-main);
+}
+
+.detail-related {
+	display: grid;
+	gap: 24px;
+	padding-top: 8px;
+}
+
+.learn-link-section,
+.learn-pagination {
+	padding-top: 20px;
+	border-top: 1px solid var(--border-soft);
+}
+
+.learn-link-section h2 {
+	margin: 0 0 10px;
+	font-size: 1.1rem;
 }
 
 .learn-link-grid {
@@ -390,5 +606,13 @@
 
 	.tab-panel {
 		padding-top: 18px;
+	}
+
+	.quiz-blank {
+		flex-direction: column;
+	}
+
+	.quiz-check {
+		min-height: 42px;
 	}
 }

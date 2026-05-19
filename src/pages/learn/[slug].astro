@@ -9,6 +9,8 @@ import SiteHeader from '../../components/SiteHeader.astro';
 import LearnDetail from '../../components/learn/LearnDetail.astro';
 import { getAdjacentLearnItems, getLearnNavItems, getRelatedLearnItems } from '../../data/learn';
 import { getLearnJsonLd, getLearnSeo } from '../../lib/learn-seo';
+import { renderSimpleMarkdown } from '../../lib/markdown';
+import { parseQuizMarkdown } from '../../lib/quiz';
 import { parseSrt } from '../../lib/srt';
 import '../../styles/shell.css';
 import '../../styles/learn-detail.css';
@@ -45,6 +47,26 @@ try {
 }
 
 const subtitles = subtitleSource ? parseSrt(subtitleSource) : [];
+
+const intensivePath = path.join(process.cwd(), 'src', 'content', 'learn', slug, 'intensive.md');
+let intensiveSource = '';
+
+try {
+	await access(intensivePath);
+	intensiveSource = await readFile(intensivePath, 'utf-8');
+} catch {
+	intensiveSource = '';
+}
+
+const quizPath = path.join(process.cwd(), 'src', 'content', 'learn', slug, 'quiz.md');
+let quizSource = '';
+
+try {
+	await access(quizPath);
+	quizSource = await readFile(quizPath, 'utf-8');
+} catch {
+	quizSource = '';
+}
 
 function normalizeBilibiliEmbedSrc(src: string) {
 	const url = new URL(src, 'https://player.bilibili.com');
@@ -104,6 +126,8 @@ const jsonLd = getLearnJsonLd(entry, slug);
 const navItems = await getLearnNavItems();
 const { previous: previousItem, next: nextItem } = getAdjacentLearnItems(navItems, slug);
 const relatedItems = getRelatedLearnItems(navItems, slug);
+const intensiveHtml = intensiveSource ? renderSimpleMarkdown(intensiveSource) : '';
+const quizQuestions = quizSource ? parseQuizMarkdown(quizSource) : [];
 ---
 
 <Layout
@@ -122,6 +146,8 @@ const relatedItems = getRelatedLearnItems(navItems, slug);
 				embedSrc={embedSrc}
 				memoryImages={memoryImages}
 				subtitles={subtitles}
+				intensiveHtml={intensiveHtml}
+				quizQuestions={quizQuestions}
 				relatedItems={relatedItems}
 				previousItem={previousItem}
 				nextItem={nextItem}

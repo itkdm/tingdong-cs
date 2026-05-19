@@ -33,7 +33,74 @@ function initTabs() {
 	});
 }
 
+function normalizeAnswer(value: string) {
+	return value.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function getAnswers(question: HTMLElement) {
+	const rawAnswers = question.dataset.quizAnswers ?? '[]';
+
+	try {
+		return (JSON.parse(rawAnswers) as string[]).map(normalizeAnswer);
+	} catch {
+		return [];
+	}
+}
+
+function showQuizResult(question: HTMLElement, isCorrect: boolean) {
+	const feedback = question.querySelector<HTMLElement>('[data-quiz-feedback]');
+	const explanation = question.querySelector<HTMLElement>('[data-quiz-explanation]');
+
+	question.classList.toggle('is-correct', isCorrect);
+	question.classList.toggle('is-wrong', !isCorrect);
+
+	if (feedback) {
+		feedback.textContent = isCorrect ? '答对了，这个表达你已经抓住了。' : '还差一点，看看解析再回到原句里想一遍。';
+	}
+
+	if (explanation) {
+		explanation.hidden = false;
+	}
+}
+
+function initQuiz() {
+	const questions = document.querySelectorAll<HTMLElement>('[data-quiz-question]');
+
+	questions.forEach((question) => {
+		const answers = getAnswers(question);
+
+		question.querySelectorAll<HTMLButtonElement>('[data-quiz-option]').forEach((option) => {
+			option.addEventListener('click', () => {
+				const selected = option.dataset.quizOption ?? '';
+				const isCorrect = answers.includes(normalizeAnswer(selected));
+
+				question.querySelectorAll<HTMLButtonElement>('[data-quiz-option]').forEach((item) => {
+					item.classList.toggle('is-selected', item === option);
+				});
+
+				showQuizResult(question, isCorrect);
+			});
+		});
+
+		const input = question.querySelector<HTMLInputElement>('[data-quiz-input]');
+		const checkButton = question.querySelector<HTMLButtonElement>('[data-quiz-check]');
+
+		checkButton?.addEventListener('click', () => {
+			const isCorrect = answers.includes(normalizeAnswer(input?.value ?? ''));
+			showQuizResult(question, isCorrect);
+		});
+
+		input?.addEventListener('keydown', (event) => {
+			if (event.key === 'Enter') {
+				event.preventDefault();
+				checkButton?.click();
+			}
+		});
+	});
+}
+
 export function initLearnDetail() {
 	initTabs();
 	initSubtitles();
+	initQuiz();
 }
