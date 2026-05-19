@@ -1,0 +1,102 @@
+---
+import type { ImageMetadata } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { formatSubtitleTime, type SubtitleLine } from '../../lib/srt';
+
+interface Props {
+	entry: CollectionEntry<'learn'>;
+	embedSrc?: string;
+	memoryImages: ImageMetadata[];
+	subtitles: SubtitleLine[];
+}
+
+const { entry, embedSrc, memoryImages, subtitles } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<article class="learn-detail">
+	<header class="detail-header">
+		<h1>{entry.data.title}</h1>
+		<a class="detail-back" href="/learn">返回学习列表</a>
+	</header>
+
+	<section class="study-stage" aria-label="视频与字幕">
+		<div class="video-panel">
+			{
+				embedSrc ? (
+					<iframe
+						data-video-frame
+						src={embedSrc}
+						title={entry.data.title}
+						allow="autoplay; fullscreen; picture-in-picture"
+						allowfullscreen
+						loading="lazy"
+					/>
+				) : (
+					<div class="video-placeholder">
+						<img src={entry.data.cover.src} width={entry.data.cover.width} height={entry.data.cover.height} alt="" />
+						<div>
+							<strong>本期视频正在整理中</strong>
+							<span>学习笔记和字幕可以先看。</span>
+						</div>
+					</div>
+				)
+			}
+		</div>
+
+		<aside class="subtitle-panel" aria-label="同步字幕列表">
+			<div class="subtitle-heading">
+				<strong>同步字幕</strong>
+				<div class="subtitle-meta">
+					<span>{subtitles.length} 条</span>
+				</div>
+			</div>
+			<div class="subtitle-list">
+				{
+					subtitles.map((line, index) => (
+						<button class={`subtitle-line ${index === 0 ? 'is-active' : ''}`} type="button" data-subtitle-line>
+							<span class="subtitle-time">{formatSubtitleTime(line.startSeconds)}</span>
+							<span class="subtitle-text">{line.text}</span>
+						</button>
+					))
+				}
+			</div>
+		</aside>
+	</section>
+
+	<section class="detail-tabs" aria-label="学习资料">
+		<div class="tab-list" role="tablist" aria-label="学习资料切换">
+			<button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="notes-panel" data-tab-target="notes-panel">
+				学习笔记
+			</button>
+			<button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="memory-panel" data-tab-target="memory-panel">
+				记忆图
+			</button>
+		</div>
+
+		<section class="tab-panel notes-panel is-active" id="notes-panel" role="tabpanel">
+			<Content />
+		</section>
+
+		<section class="tab-panel memory-panel" id="memory-panel" role="tabpanel" hidden>
+			{
+				memoryImages.length > 0 ? (
+					memoryImages.map((image, index) => (
+						<figure class="memory-card">
+							<img src={image.src} width={image.width} height={image.height} alt={`${entry.data.title} 记忆图 ${index + 1}`} loading="lazy" />
+						</figure>
+					))
+				) : (
+					<p class="empty-state">本期记忆图正在整理中。</p>
+				)
+			}
+		</section>
+	</section>
+</article>
+
+<script>
+	import { initLearnDetail } from '../../scripts/learn-detail';
+
+	initLearnDetail();
+</script>

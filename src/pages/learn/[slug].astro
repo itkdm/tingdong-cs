@@ -1,0 +1,110 @@
+---
+import { access, readFile } from 'node:fs/promises';
+import path from 'node:path';
+import type { ImageMetadata } from 'astro';
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import LearnDetail from '../../components/learn/LearnDetail.astro';
+import { parseSrt } from '../../lib/srt';
+import '../../styles/shell.css';
+import '../../styles/learn-detail.css';
+
+export async function getStaticPaths() {
+	const entries = await getCollection('learn', ({ data }) => data.published);
+
+	return entries.map((entry) => ({
+		params: { slug: entry.id.replace(/\/index$/, '') },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const slug = entry.id.replace(/\/index$/, '');
+
+const memoryModules = import.meta.glob<{ default: ImageMetadata }>('../../content/learn/**/memory-*.png', {
+	eager: true,
+});
+
+const memoryImages = Object.entries(memoryModules)
+	.filter(([key]) => key.includes(`/content/learn/${slug}/`))
+	.sort(([a], [b]) => a.localeCompare(b))
+	.map(([, module]) => module.default);
+
+const subtitlePath = path.join(process.cwd(), 'src', 'content', 'learn', slug, 'subtitles.srt');
+let subtitleSource = '';
+
+try {
+	await access(subtitlePath);
+	subtitleSource = await readFile(subtitlePath, 'utf-8');
+} catch {
+	subtitleSource = '';
+}
+
+const subtitles = subtitleSource ? parseSrt(subtitleSource) : [];
+
+function normalizeBilibiliEmbedSrc(src: string) {
+	const url = new URL(src, 'https://player.bilibili.com');
+
+	if (!url.hostname.includes('bilibili.com')) {
+		return src;
+	}
+
+	const params = new URLSearchParams({
+		isOutside: 'true',
+		autoplay: '0',
+		danmaku: '0',
+	});
+
+	const bvid = url.searchParams.get('bvid');
+	const page = url.searchParams.get('p') ?? '1';
+
+	if (bvid) {
+		params.set('bvid', bvid);
+	}
+
+	params.set('p', page);
+
+	return `https://player.bilibili.com/player.html?${params.toString()}`;
+}
+
+function normalizeEmbedSrc(value: string) {
+	const iframeSrc = value.match(/src=["']([^"']+)["']/i)?.[1];
+	const src = iframeSrc ?? value;
+
+	if (src.startsWith('//')) {
+		return normalizeBilibiliEmbedSrc(`https:${src}`);
+	}
+
+	return normalizeBilibiliEmbedSrc(src);
+}
+
+function getBilibiliEmbedSrc(video?: typeof entry.data.video) {
+	if (!video?.bvid) {
+		return undefined;
+	}
+
+	const params = new URLSearchParams({
+		isOutside: 'true',
+		bvid: video.bvid,
+		p: String(video.page),
+		autoplay: '0',
+		danmaku: '0',
+	});
+
+	return `https://player.bilibili.com/player.html?${params.toString()}`;
+}
+
+const embedSrc = entry.data.videoEmbed ? normalizeEmbedSrc(entry.data.videoEmbed) : getBilibiliEmbedSrc(entry.data.video);
+---
+
+<Layout title={`${entry.data.title} | 听懂CS`} description={entry.data.excerpt}>
+	<div class="page-shell">
+		<SiteHeader />
+		<main class="page-main detail-main">
+			<LearnDetail entry={entry} embedSrc={embedSrc} memoryImages={memoryImages} subtitles={subtitles} />
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>

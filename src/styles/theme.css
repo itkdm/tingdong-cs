@@ -34,6 +34,7 @@
 	--header-scrolled-shadow: none;
 	--logo-bg: rgba(255, 251, 245, 0.92);
 	--logo-border: rgba(104, 115, 95, 0.24);
+	--footer-bg: rgba(231, 223, 210, 0.74);
 
 	--surface-card: rgba(255, 251, 245, 0.94);
 	--surface-card-alt: rgba(241, 235, 222, 0.92);
@@ -53,6 +54,8 @@
 	--accent-soft: rgba(201, 79, 61, 0.12);
 
 	--shadow-card: 0 24px 70px rgba(41, 33, 26, 0.12);
+	--shadow-card-hover: 0 28px 80px rgba(41, 33, 26, 0.16);
+	--shadow-media: 0 16px 42px rgba(41, 33, 26, 0.12);
 	--shadow-brand: rgba(159, 59, 45, 0.22);
 	--shadow-button: rgba(169, 65, 49, 0.18);
 	--shadow-bullet: rgba(201, 79, 61, 0.28);

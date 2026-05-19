@@ -2,37 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import LearnGrid from '../components/learn/LearnGrid.astro';
+import { getLearnCardItems } from '../data/learn';
 import '../styles/shell.css';
+import '../styles/learn.css';
+
+const items = await getLearnCardItems();
 ---
 
 <Layout
 	title="学习内容 | 听懂CS"
-	description="通过真实 CS2/CSGO 解说片段，系统学习电竞英语、场景表达和日常用语。"
+	description="从真实比赛片段进入语境，逐步听懂电竞英语。"
 >
 	<div class="page-shell">
 		<SiteHeader />
 		<main class="page-main">
-			<div class="page-container">
-				<header class="page-header">
-					<p class="page-kicker">Learning Content</p>
-					<h1>学习内容</h1>
-					<p class="page-intro">从真实比赛中提炼的地道表达，助你真正听懂解说。</p>
-				</header>
-
-				<section class="content-section">
-					<h2>赛事高频表达</h2>
-					<p>比赛中最常见的词汇和短句，是建立听感的第一步。</p>
-				</section>
-
-				<section class="content-section">
-					<h2>句式拆解</h2>
-					<p>把连续输出拆成能复述的表达，逐一击破。</p>
-				</section>
-
-				<section class="content-section">
-					<h2>场景英语</h2>
-					<p>覆盖报点、战术、情绪等各种真实语境。</p>
-				</section>
+			<div class="learn-page">
+				<LearnGrid items={items} />
 			</div>
 		</main>
 		<SiteFooter />

@@ -1,0 +1,25 @@
+---
+import type { LearnCardItem } from '../../data/learn';
+
+interface Props {
+	items: LearnCardItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="learn-grid" aria-label="学习内容列表">
+	{
+		items.map((item) => (
+			<a class="learn-card" href={`/learn/${item.slug}/`} aria-label={`进入 ${item.title}`}>
+				<div class="learn-card-cover">
+					<img src={item.cover.src} width={item.cover.width} height={item.cover.height} alt={item.title} loading="lazy" />
+				</div>
+				<div class="learn-card-body">
+					<h2>{item.title}</h2>
+					<p class="learn-card-date">{item.date}</p>
+				</div>
+			</a>
+		))
+	}
+</section>
