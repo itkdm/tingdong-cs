@@ -6,14 +6,18 @@ interface Props {
 }
 
 const { items } = Astro.props;
+const numberedItems = items.map((item, index) => ({
+	item,
+	episodeNumber: items.length - index,
+}));
 ---
 
 <section class="learn-grid" aria-label="学习内容列表">
 	{
-		items.map((item, index) => (
+		numberedItems.map(({ item, episodeNumber }) => (
 			<a class="learn-card" href={`/learn/${item.slug}/`} aria-label={`进入 ${item.title}`}>
 				<div class="learn-card-cover">
-					<span class="learn-card-index" aria-label={`第 ${index + 1} 期`}>{String(index + 1).padStart(2, '0')}</span>
+					<span class="learn-card-index" aria-label={`第 ${episodeNumber} 期`}>{String(episodeNumber).padStart(2, '0')}</span>
 					<img src={item.cover.src} width={item.cover.width} height={item.cover.height} alt={item.title} loading="lazy" />
 				</div>
 				<div class="learn-card-body">
