@@ -5,6 +5,7 @@ excerpt: 从 FaZe vs Na'Vi 的 Dust2 片段，学习 the odds are stacked agains
 seoTitle: the odds are stacked against 怎么翻译？｜CS2英文解说学习｜听懂CS
 seoDescription: the odds are stacked against 可以理解为“形势不利、不被看好”。本期用 FaZe vs Na'Vi 的 Dust2 片段，学习 CS2 英文解说里的赛前铺垫和回合表达。
 primaryKeyword: the odds are stacked against 怎么翻译
+summary: "`the odds are stacked against ...` 可以理解为“形势对……不利”或“……不被看好”，常用于赛前铺垫弱势方处境。"
 keywords:
   - 英文解说不被看好怎么说
   - CS2英文解说不被看好

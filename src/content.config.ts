@@ -14,6 +14,7 @@ const learn = defineCollection({
 			seoTitle: z.string().optional(),
 			seoDescription: z.string().optional(),
 			primaryKeyword: z.string().optional(),
+			summary: z.string().optional(),
 			keywords: z.array(z.string()).default([]),
 			tags: z.array(z.string()).default([]),
 			videoEmbed: z.string().optional(),

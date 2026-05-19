@@ -5,6 +5,7 @@ excerpt: 用 G2 vs Vitality 的 Mirage 手枪局片段，听懂 Plan A's out the
 seoTitle: Plan A's out the window 什么意思？｜CS2英文解说学习｜听懂CS
 seoDescription: Plan A's out the window 可以理解为“原计划作废了”。本期用 G2 vs Vitality 的 Mirage 手枪局片段，拆解 CS2 英文解说里的计划失效和手枪局经济表达。
 primaryKeyword: Plan A's out the window 什么意思
+summary: "`Plan A's out the window` 可以理解为“原计划作废了”，常用来形容比赛里原本安排被开局局势彻底打乱。"
 keywords:
   - Plan A's out the window 怎么翻译
   - 比赛里计划全没了英语怎么说

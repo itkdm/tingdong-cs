@@ -5,6 +5,7 @@ excerpt: 用 Falcons vs FURIA 的 Nuke 关键回合，学习 it all hinges on、
 seoTitle: it all hinges on 怎么翻译？m0NESY 残局英文解说｜听懂CS
 seoDescription: it all hinges on 可以理解为“一切都取决于”。本期用 m0NESY 的 Nuke 关键残局，学习 cracked wide open、nail-biter 和 defuse 等英文解说表达。
 primaryKeyword: it all hinges on 怎么翻译
+summary: "`it all hinges on ...` 可以理解为“一切都取决于……”，常用来描述残局压力集中到某个关键选手或动作上。"
 keywords:
   - m0NESY 残局英文解说
   - nail-biter 什么意思

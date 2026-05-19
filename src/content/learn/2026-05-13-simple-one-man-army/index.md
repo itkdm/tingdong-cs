@@ -5,6 +5,7 @@ excerpt: 用 s1mple 的 Dust2 B 点高光，学习 one-man army、back-to-back t
 seoTitle: one-man army 怎么翻译？s1mple 高光英文解说｜听懂CS
 seoDescription: one-man army 可以理解为“一人扛一队”。本期用 s1mple 的 Dust2 B 点高光，学习 one-man army、back-to-back triples 和 save round。
 primaryKeyword: one-man army 怎么翻译
+summary: "`one-man army` 可以理解为“一人扛一队”，用来形容选手一个人打出接近整支队伍的影响力。"
 keywords:
   - one-man army 什么意思
   - s1mple 英文解说

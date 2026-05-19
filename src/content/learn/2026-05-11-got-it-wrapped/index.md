@@ -5,6 +5,7 @@ excerpt: 用 9z vs Falcons 的决胜图片段，学习 got it wrapped、opening 
 seoTitle: got it wrapped 怎么翻译？比赛里“稳了”怎么说｜听懂CS
 seoDescription: got it wrapped 可以理解为“基本稳了、差不多拿下了”。本期用 9z vs Falcons 的决胜图片段，学习局势判断、opening kill 和 secure the playoffs。
 primaryKeyword: got it wrapped 怎么翻译
+summary: "`got it wrapped` 可以理解为“基本稳了”或“差不多拿下了”，常用来描述一方已经把局势牢牢控制住。"
 keywords:
   - 比赛里稳了英语怎么说
   - got it wrapped 什么意思

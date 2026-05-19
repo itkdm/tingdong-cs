@@ -5,6 +5,7 @@ excerpt: 从 NiKo 赛后采访里，学习 make playoffs、all jokes aside 和 c
 seoTitle: change the whole system 怎么理解？NiKo 赛后采访英语｜听懂CS
 seoDescription: NiKo 在赛后采访里提到换 IGL 基本等于换整套体系。本期学习 make playoffs、all jokes aside、change the whole system 等 CS2 采访英语表达。
 primaryKeyword: change the whole system 怎么理解
+summary: "`change the whole system` 在 NiKo 采访语境里指换 IGL 会影响整套队伍体系，不只是换一个指挥那么简单。"
 keywords:
   - NiKo 赛后采访英语
   - change IGL 什么意思

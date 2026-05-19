@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
+import type { LearnNavItem } from '../../data/learn';
 import { formatSubtitleTime, type SubtitleLine } from '../../lib/srt';
 
 interface Props {
@@ -9,9 +10,12 @@ interface Props {
 	embedSrc?: string;
 	memoryImages: ImageMetadata[];
 	subtitles: SubtitleLine[];
+	relatedItems?: LearnNavItem[];
+	previousItem?: LearnNavItem;
+	nextItem?: LearnNavItem;
 }
 
-const { entry, embedSrc, memoryImages, subtitles } = Astro.props;
+const { entry, embedSrc, memoryImages, subtitles, relatedItems = [], previousItem, nextItem } = Astro.props;
 const { Content } = await render(entry);
 ---
 
@@ -76,7 +80,49 @@ const { Content } = await render(entry);
 		</div>
 
 		<section class="tab-panel notes-panel is-active" id="notes-panel" role="tabpanel">
+			{
+				entry.data.summary ? (
+					<section class="expression-summary" aria-label="核心表达速记">
+						<h2>核心表达速记</h2>
+						<p>{entry.data.summary}</p>
+					</section>
+				) : null
+			}
 			<Content />
+			{
+				relatedItems.length > 0 ? (
+					<section class="learn-link-section" aria-label="相关学习">
+						<h2>相关学习</h2>
+						<div class="learn-link-grid">
+							{relatedItems.map((item) => (
+								<a href={`/learn/${item.slug}/`}>{item.title}</a>
+							))}
+						</div>
+					</section>
+				) : null
+			}
+			{
+				previousItem || nextItem ? (
+					<nav class="learn-pagination" aria-label="上一篇和下一篇">
+						{previousItem ? (
+							<a href={`/learn/${previousItem.slug}/`}>
+								<span>上一篇</span>
+								<strong>{previousItem.title}</strong>
+							</a>
+						) : (
+							<span />
+						)}
+						{nextItem ? (
+							<a href={`/learn/${nextItem.slug}/`}>
+								<span>下一篇</span>
+								<strong>{nextItem.title}</strong>
+							</a>
+						) : (
+							<span />
+						)}
+					</nav>
+				) : null
+			}
 		</section>
 
 		<section class="tab-panel memory-panel" id="memory-panel" role="tabpanel" hidden>

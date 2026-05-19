@@ -7,6 +7,7 @@ import Layout from '../../layouts/Layout.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import LearnDetail from '../../components/learn/LearnDetail.astro';
+import { getAdjacentLearnItems, getLearnNavItems, getRelatedLearnItems } from '../../data/learn';
 import { getLearnJsonLd, getLearnSeo } from '../../lib/learn-seo';
 import { parseSrt } from '../../lib/srt';
 import '../../styles/shell.css';
@@ -100,6 +101,9 @@ function getBilibiliEmbedSrc(video?: typeof entry.data.video) {
 const embedSrc = entry.data.videoEmbed ? normalizeEmbedSrc(entry.data.videoEmbed) : getBilibiliEmbedSrc(entry.data.video);
 const seo = getLearnSeo(entry, slug);
 const jsonLd = getLearnJsonLd(entry, slug);
+const navItems = await getLearnNavItems();
+const { previous: previousItem, next: nextItem } = getAdjacentLearnItems(navItems, slug);
+const relatedItems = getRelatedLearnItems(navItems, slug);
 ---
 
 <Layout
@@ -113,7 +117,15 @@ const jsonLd = getLearnJsonLd(entry, slug);
 	<div class="page-shell">
 		<SiteHeader />
 		<main class="page-main detail-main">
-			<LearnDetail entry={entry} embedSrc={embedSrc} memoryImages={memoryImages} subtitles={subtitles} />
+			<LearnDetail
+				entry={entry}
+				embedSrc={embedSrc}
+				memoryImages={memoryImages}
+				subtitles={subtitles}
+				relatedItems={relatedItems}
+				previousItem={previousItem}
+				nextItem={nextItem}
+			/>
 		</main>
 		<SiteFooter />
 	</div>

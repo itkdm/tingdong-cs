@@ -31,6 +31,7 @@ export function getLearnSeo(entry: LearnEntry, slug: string) {
 	const title = entry.data.seoTitle ?? `${entry.data.title}｜CS2英文解说学习｜${siteName}`;
 	const description =
 		entry.data.seoDescription ??
+		entry.data.summary ??
 		`本期拆解「${primaryKeyword}」的真实比赛语境，包含B站视频、同步字幕、学习笔记和记忆图，适合学习 CS2 英文解说和电竞英语。`;
 	const keywords = Array.from(new Set([primaryKeyword, ...entry.data.keywords, ...entry.data.tags, ...defaultLearningKeywords]));
 
