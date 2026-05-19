@@ -7,6 +7,7 @@ import Layout from '../../layouts/Layout.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import LearnDetail from '../../components/learn/LearnDetail.astro';
+import { getLearnJsonLd, getLearnSeo } from '../../lib/learn-seo';
 import { parseSrt } from '../../lib/srt';
 import '../../styles/shell.css';
 import '../../styles/learn-detail.css';
@@ -97,15 +98,18 @@ function getBilibiliEmbedSrc(video?: typeof entry.data.video) {
 }
 
 const embedSrc = entry.data.videoEmbed ? normalizeEmbedSrc(entry.data.videoEmbed) : getBilibiliEmbedSrc(entry.data.video);
+const seo = getLearnSeo(entry, slug);
+const jsonLd = getLearnJsonLd(entry, slug);
 ---
 
 <Layout
-	title={`${entry.data.title} | 听懂CS`}
-	description={entry.data.excerpt}
-	canonicalPath={`/learn/${slug}/`}
+	title={seo.title}
+	description={seo.description}
+	canonicalPath={seo.canonicalPath}
 	image={entry.data.cover.src}
 	type="article"
 >
+	{jsonLd.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
 	<div class="page-shell">
 		<SiteHeader />
 		<main class="page-main detail-main">

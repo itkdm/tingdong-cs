@@ -2,6 +2,15 @@
 title: 猎鹰图三仅拿一分？解说 got it wrapped 怎么翻译？
 date: 2026-05-11
 excerpt: 用 9z vs Falcons 的决胜图片段，学习 got it wrapped、opening kill 和 secure the playoffs。
+seoTitle: got it wrapped 怎么翻译？比赛里“稳了”怎么说｜听懂CS
+seoDescription: got it wrapped 可以理解为“基本稳了、差不多拿下了”。本期用 9z vs Falcons 的决胜图片段，学习局势判断、opening kill 和 secure the playoffs。
+primaryKeyword: got it wrapped 怎么翻译
+keywords:
+  - 比赛里稳了英语怎么说
+  - got it wrapped 什么意思
+  - opening kill 什么意思
+  - secure the playoffs 怎么翻译
+  - CS2局势判断英语
 tags:
   - 局势判断
   - 决胜图

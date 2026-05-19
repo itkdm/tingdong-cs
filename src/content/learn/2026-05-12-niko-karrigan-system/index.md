@@ -2,6 +2,15 @@
 title: NiKo 如何评价新指挥 karrigan？
 date: 2026-05-12
 excerpt: 从 NiKo 赛后采访里，学习 make playoffs、all jokes aside 和 change the whole system。
+seoTitle: change the whole system 怎么理解？NiKo 赛后采访英语｜听懂CS
+seoDescription: NiKo 在赛后采访里提到换 IGL 基本等于换整套体系。本期学习 make playoffs、all jokes aside、change the whole system 等 CS2 采访英语表达。
+primaryKeyword: change the whole system 怎么理解
+keywords:
+  - NiKo 赛后采访英语
+  - change IGL 什么意思
+  - make playoffs 怎么翻译
+  - all jokes aside 什么意思
+  - CS2采访英语
 tags:
   - 赛后采访
   - NiKo

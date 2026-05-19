@@ -2,6 +2,15 @@
 title: s1mple 这波真成一人军队了
 date: 2026-05-13
 excerpt: 用 s1mple 的 Dust2 B 点高光，学习 one-man army、back-to-back triples 和 save round。
+seoTitle: one-man army 怎么翻译？s1mple 高光英文解说｜听懂CS
+seoDescription: one-man army 可以理解为“一人扛一队”。本期用 s1mple 的 Dust2 B 点高光，学习 one-man army、back-to-back triples 和 save round。
+primaryKeyword: one-man army 怎么翻译
+keywords:
+  - one-man army 什么意思
+  - s1mple 英文解说
+  - back-to-back triples 怎么翻译
+  - save round 什么意思
+  - CS2高光英文解说
 tags:
   - s1mple
   - 高光回合

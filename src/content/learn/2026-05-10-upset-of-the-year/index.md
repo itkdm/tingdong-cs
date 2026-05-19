@@ -2,6 +2,15 @@
 title: 英文解说怎么说“爆冷”？
 date: 2026-05-10
 excerpt: 用 Vitality vs GamerLegion 的开场解说，学习 upset of the year、insurmountable 和 wiped off the board。
+seoTitle: upset of the year 什么意思？英文解说怎么说爆冷｜听懂CS
+seoDescription: upset of the year 在比赛解说里表示“年度级别的爆冷”。本期用 Vitality vs GamerLegion 的开场解说，学习爆冷、强弱对比和回合结果表达。
+primaryKeyword: upset of the year 什么意思
+keywords:
+  - 英文解说爆冷怎么说
+  - upset 比赛里什么意思
+  - CS2英文解说爆冷
+  - insurmountable 什么意思
+  - wiped off the board 怎么翻译
 tags:
   - 赛前铺垫
   - 爆冷表达

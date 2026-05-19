@@ -1,9 +1,9 @@
 export const siteName = '听懂CS';
 export const defaultSeoImage = '/images/hero-bg.png';
 
-const fallbackSiteUrl = 'https://cs.itkdm.com';
+export const fallbackSiteUrl = 'https://cs.itkdm.com';
 
-function getSiteUrl() {
+export function getSiteUrl() {
 	return new URL(import.meta.env.SITE ?? fallbackSiteUrl);
 }
 

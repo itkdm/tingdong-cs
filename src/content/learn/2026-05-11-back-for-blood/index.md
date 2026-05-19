@@ -2,6 +2,15 @@
 title: 解说 back for blood 到底怎么翻译？
 date: 2026-05-11
 excerpt: 用 Na'Vi vs Vitality 总决赛开场，拆解 back for blood、rematch 和一换一等高频表达。
+seoTitle: back for blood 怎么翻译？｜CS2英文解说学习｜听懂CS
+seoDescription: back for blood 在比赛解说里可以理解为“带着复仇心态回来”。本期用 Na'Vi vs Vitality 总决赛开场，拆解复仇战、rematch 和一换一表达。
+primaryKeyword: back for blood 怎么翻译
+keywords:
+  - back for blood 什么意思
+  - CS2英文解说复仇战
+  - rematch 什么意思
+  - go one for one 怎么翻译
+  - clinical precision 什么意思
 tags:
   - 总决赛
   - 情绪表达

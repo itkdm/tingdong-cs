@@ -2,6 +2,15 @@
 title: 比赛里“计划全没了”英语怎么说？
 date: 2026-05-09
 excerpt: 用 G2 vs Vitality 的 Mirage 手枪局片段，听懂 Plan A's out the window 和手枪局经济表达。
+seoTitle: Plan A's out the window 什么意思？｜CS2英文解说学习｜听懂CS
+seoDescription: Plan A's out the window 可以理解为“原计划作废了”。本期用 G2 vs Vitality 的 Mirage 手枪局片段，拆解 CS2 英文解说里的计划失效和手枪局经济表达。
+primaryKeyword: Plan A's out the window 什么意思
+keywords:
+  - Plan A's out the window 怎么翻译
+  - 比赛里计划全没了英语怎么说
+  - CS2手枪局英语
+  - force buy 什么意思
+  - full eco 什么意思
 tags:
   - 手枪局
   - 局势表达

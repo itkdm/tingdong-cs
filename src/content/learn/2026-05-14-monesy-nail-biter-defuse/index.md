@@ -2,6 +2,15 @@
 title: m0NESY 这残局也太夸张了
 date: 2026-05-14
 excerpt: 用 Falcons vs FURIA 的 Nuke 关键回合，学习 it all hinges on、cracked wide open 和 nail-biter。
+seoTitle: it all hinges on 怎么翻译？m0NESY 残局英文解说｜听懂CS
+seoDescription: it all hinges on 可以理解为“一切都取决于”。本期用 m0NESY 的 Nuke 关键残局，学习 cracked wide open、nail-biter 和 defuse 等英文解说表达。
+primaryKeyword: it all hinges on 怎么翻译
+keywords:
+  - m0NESY 残局英文解说
+  - nail-biter 什么意思
+  - cracked wide open 怎么翻译
+  - defuse 什么意思
+  - CS2残局英语
 tags:
   - m0NESY
   - 残局

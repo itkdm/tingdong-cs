@@ -2,6 +2,15 @@
 title: donk 拿下冠军后的采访
 date: 2026-05-18
 excerpt: 从 donk 赛后采访里，学习 make them cry、mean to you 和采访常见高频表达。
+seoTitle: make them cry 什么意思？donk 赛后采访英语｜听懂CS
+seoDescription: make them cry 在 donk 赛后采访语境里带有“把对手打崩”的狠话意味。本期学习 mean to you、normally、arena、crowd 等采访高频表达。
+primaryKeyword: make them cry 什么意思
+keywords:
+  - donk 赛后采访英语
+  - mean to you 怎么翻译
+  - CS2采访英语
+  - 电竞采访常用英语
+  - arena crowd 什么意思
 tags:
   - 赛后采访
   - 口语表达
