@@ -9,7 +9,7 @@ import '../styles/shell.css';
 import '../styles/home.css';
 ---
 
-<Layout title={homeMeta.title} description={homeMeta.description}>
+<Layout title={homeMeta.title} description={homeMeta.description} canonicalPath="/" image="/images/hero-bg.png">
 	<div id="top" class="page-shell" style={`--hero-bg-image: url(${import.meta.env.BASE_URL}images/hero-bg.png);`}>
 		<SiteHeader />
 		<HomeHero />

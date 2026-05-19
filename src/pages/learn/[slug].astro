@@ -99,7 +99,13 @@ function getBilibiliEmbedSrc(video?: typeof entry.data.video) {
 const embedSrc = entry.data.videoEmbed ? normalizeEmbedSrc(entry.data.videoEmbed) : getBilibiliEmbedSrc(entry.data.video);
 ---
 
-<Layout title={`${entry.data.title} | 听懂CS`} description={entry.data.excerpt}>
+<Layout
+	title={`${entry.data.title} | 听懂CS`}
+	description={entry.data.excerpt}
+	canonicalPath={`/learn/${slug}/`}
+	image={entry.data.cover.src}
+	type="article"
+>
 	<div class="page-shell">
 		<SiteHeader />
 		<main class="page-main detail-main">

@@ -1,18 +1,28 @@
 ---
+import { buildAssetUrl, buildCanonicalUrl, defaultSeoImage, siteName } from '../lib/seo';
 import '../styles/theme.css';
 import '../styles/global.css';
 
 interface Props {
 	title?: string;
 	description?: string;
+	canonicalPath?: string;
+	image?: string;
+	type?: 'website' | 'article';
 	theme?: 'tactical-board';
 }
 
 const {
 	title = '听懂CS | 用真实比赛学地道电竞英语',
 	description = '用 CS2 / CSGO 真实解说片段，学习电竞英语、日常表达、单词、句式和语法。',
+	canonicalPath = Astro.url.pathname,
+	image = defaultSeoImage,
+	type = 'website',
 	theme = 'tactical-board',
 } = Astro.props;
+
+const canonicalUrl = buildCanonicalUrl(canonicalPath);
+const imageUrl = buildAssetUrl(image);
 ---
 
 <!doctype html>
@@ -22,12 +32,21 @@ const {
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 		<link rel="shortcut icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
+		<link rel="canonical" href={canonicalUrl} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#f4f0e6" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={imageUrl} />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:locale" content="zh_CN" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageUrl} />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
