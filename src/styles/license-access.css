@@ -50,6 +50,27 @@
 	line-height: 1.75;
 }
 
+.access-purchase {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+	min-height: 42px;
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-control);
+	padding: 0 16px;
+	color: var(--text-strong);
+	font-weight: 900;
+	text-decoration: none;
+	background: var(--surface-control);
+}
+
+.access-purchase:hover {
+	border-color: var(--accent);
+	color: var(--accent-strong);
+	box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
 .access-form {
 	display: flex;
 	flex-direction: column;
