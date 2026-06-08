@@ -7,12 +7,23 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run worker:bundle",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "node --test test/*.test.mjs",
+    "worker:bundle": "esbuild worker/index.mjs --bundle --format=esm --outfile=dist/_worker.js",
+    "worker:dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply tingdong-cs-license --local",
+    "db:migrate:remote": "wrangler d1 migrations apply tingdong-cs-license --remote",
+    "licenses:generate": "node scripts/license-generator.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.3.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "wrangler": "^4.98.0"
   }
 }

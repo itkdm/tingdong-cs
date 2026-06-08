@@ -1,0 +1,131 @@
+.access-main {
+	display: grid;
+	align-items: center;
+}
+
+.access-panel {
+	display: grid;
+	grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.72fr);
+	gap: 48px;
+	align-items: center;
+	width: 100%;
+	max-width: 980px;
+	margin: 0 auto;
+	padding: 42px;
+	border: 1px solid var(--border-soft);
+	border-radius: var(--radius-card);
+	background: var(--surface-card);
+	box-shadow: var(--shadow-card);
+}
+
+.access-copy {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.access-kicker {
+	margin: 0;
+	color: var(--accent);
+	font-family: 'Teko', sans-serif;
+	font-size: 1.14rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.access-copy h1 {
+	margin: 0;
+	color: var(--text-heading);
+	font-family: 'Teko', sans-serif;
+	font-size: clamp(2.35rem, 6vw, 4.4rem);
+	line-height: 0.98;
+}
+
+.access-copy p:last-child {
+	max-width: 30rem;
+	margin: 0;
+	color: var(--text-muted);
+	font-size: 1.06rem;
+	line-height: 1.75;
+}
+
+.access-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.access-field {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	color: var(--text-strong);
+	font-weight: 800;
+}
+
+.access-field input {
+	width: 100%;
+	min-height: 50px;
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-control);
+	padding: 0 14px;
+	color: var(--text-main);
+	font: inherit;
+	font-weight: 700;
+	background: var(--surface-control);
+	outline: none;
+	text-transform: uppercase;
+}
+
+.access-field input:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.access-submit {
+	min-height: 52px;
+	border: 0;
+	border-radius: var(--radius-control);
+	color: var(--accent-contrast);
+	font: inherit;
+	font-weight: 900;
+	background: linear-gradient(135deg, var(--accent), var(--accent-end));
+	box-shadow: 0 16px 36px var(--shadow-button);
+	cursor: pointer;
+}
+
+.access-submit:hover {
+	background: var(--accent-strong);
+}
+
+.access-submit:disabled {
+	cursor: wait;
+	opacity: 0.72;
+}
+
+.access-feedback {
+	min-height: 1.6em;
+	margin: 0;
+	color: var(--text-muted);
+	font-size: 0.94rem;
+	line-height: 1.6;
+}
+
+.access-feedback[data-state='success'] {
+	color: var(--accent-strong);
+	font-weight: 800;
+}
+
+.access-feedback[data-state='error'] {
+	color: var(--accent-strong);
+	font-weight: 800;
+}
+
+@media (max-width: 780px) {
+	.access-panel {
+		grid-template-columns: 1fr;
+		gap: 28px;
+		padding: 28px 22px;
+	}
+}

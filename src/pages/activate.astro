@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import '../styles/shell.css';
+import '../styles/license-access.css';
+---
+
+<Layout
+	title="激活访问 | 听懂CS"
+	description="输入已购买的听懂CS卡密，激活后即可长期访问学习详情内容。"
+	canonicalPath="/activate/"
+	image="/images/hero-bg.png"
+>
+	<div class="page-shell">
+		<SiteHeader />
+		<main class="page-main access-main">
+			<section class="access-panel" aria-labelledby="access-title">
+				<div class="access-copy">
+					<p class="access-kicker">Access</p>
+					<h1 id="access-title">激活学习访问</h1>
+					<p>输入购买后获得的卡密，激活成功后，这台设备会自动保持访问状态。</p>
+				</div>
+
+				<form class="access-form" data-activate-form>
+					<input type="hidden" name="next" value="/learn/" data-next-input />
+					<label class="access-field">
+						<span>卡密</span>
+						<input
+							type="text"
+							name="licenseKey"
+							autocomplete="off"
+							inputmode="text"
+							placeholder="TDCS-XXXX-XXXX-XXXX-XXXX"
+							required
+							data-license-input
+						/>
+					</label>
+					<button class="access-submit" type="submit" data-submit-button>激活访问</button>
+					<p class="access-feedback" data-activate-feedback aria-live="polite"></p>
+				</form>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>
+
+<script>
+	import { initActivationForm } from '../scripts/activate';
+
+	initActivationForm();
+</script>

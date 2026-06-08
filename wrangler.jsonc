@@ -1,0 +1,20 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "tingdong-cs",
+	"main": "worker/index.mjs",
+	"compatibility_date": "2026-06-08",
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "tingdong-cs-license",
+			"database_id": "156211d3-a5a4-4ab2-ae53-ee04684088e7"
+		}
+	],
+	"vars": {
+		"ACCESS_COOKIE_NAME": "tdcs_session"
+	}
+}
