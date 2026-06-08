@@ -12,7 +12,7 @@ export function isProtectedPath(pathname) {
 		return false;
 	}
 
-	return pathname !== '/learn/';
+	return pathname !== '/learn/' && pathname !== '/learn/index.html';
 }
 
 export function sanitizeNextPath(value) {

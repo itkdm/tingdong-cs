@@ -16,7 +16,23 @@ export default {
 		const url = new URL(request.url);
 
 		if (url.pathname === '/api/activate') {
-			return handleActivate(request, env);
+			try {
+				return await handleActivate(request, env);
+			} catch (error) {
+				if (env.DEBUG_ACTIVATION_ERRORS === '1') {
+					return json(
+						{
+							ok: false,
+							name: error?.name,
+							message: error?.message,
+							stack: error?.stack?.split('\n').slice(0, 3),
+						},
+						{ status: 500 },
+					);
+				}
+
+				return json({ ok: false, message: '激活服务暂时不可用，请稍后重试。' }, { status: 500 });
+			}
 		}
 
 		if (!isProtectedPath(url.pathname)) {
@@ -41,14 +57,24 @@ export default {
 };
 
 async function fetchStaticAsset(request, env) {
+	const requestUrl = new URL(request.url);
+	const assetPath = resolveAssetPath(requestUrl.pathname);
+
 	if (env.ASSETS) {
-		return env.ASSETS.fetch(request);
+		const assetUrl = new URL(request.url);
+		assetUrl.pathname = assetPath;
+		const response = await env.ASSETS.fetch(new Request(assetUrl, request));
+		if (response.status !== 404 || !env.ORIGIN_URL) {
+			return withStaticContentType(response, assetPath);
+		}
+	}
+
+	if (!env.ORIGIN_URL) {
+		return new Response('Not Found', { status: 404 });
 	}
 
 	const origin = new URL(env.ORIGIN_URL);
-	const requestUrl = new URL(request.url);
 	const originPath = origin.pathname.replace(/\/$/, '');
-	const assetPath = resolveAssetPath(requestUrl.pathname);
 	const target = new URL(`${originPath}${assetPath}${requestUrl.search}`, origin);
 
 	const response = await (env.originFetch ?? fetch)(new Request(target, request));
@@ -70,6 +96,11 @@ function resolveAssetPath(pathname) {
 function withStaticContentType(response, assetPath) {
 	const headers = new Headers(response.headers);
 	const contentType = getContentType(assetPath);
+
+	headers.delete('content-security-policy');
+	headers.delete('x-frame-options');
+	headers.delete('x-xss-protection');
+	headers.delete('x-content-type-options');
 
 	if (contentType) {
 		headers.set('content-type', contentType);

@@ -10,7 +10,15 @@ describe('license access worker routes', () => {
 		const response = await worker.fetch(new Request('https://cs.itkdm.com/learn/'), env, {});
 
 		assert.equal(response.status, 200);
-		assert.equal(await response.text(), 'asset:/learn/');
+		assert.equal(await response.text(), 'asset:/learn/index.html');
+	});
+
+	it('serves the activation page through directory index resolution', async () => {
+		const env = createEnv();
+		const response = await worker.fetch(new Request('https://cs.itkdm.com/activate/'), env, {});
+
+		assert.equal(response.status, 200);
+		assert.equal(await response.text(), 'asset:/activate/index.html');
 	});
 
 	it('can proxy public pages from an origin when no assets binding is available', async () => {
@@ -26,6 +34,32 @@ describe('license access worker routes', () => {
 		assert.equal(response.status, 200);
 		assert.equal(await response.text(), 'https://raw.example.com/site/about/index.html');
 		assert.equal(response.headers.get('content-type'), 'text/html; charset=utf-8');
+	});
+
+	it('falls back to an origin when the pages assets binding misses', async () => {
+		const env = createEnv({
+			ORIGIN_URL: 'https://raw.example.com/site',
+			ASSETS: {
+				fetch() {
+					return new Response('asset miss', { status: 404 });
+				},
+			},
+			originFetch(request) {
+				return new Response(new URL(request.url).href, {
+					headers: {
+						'content-security-policy': "default-src 'none'",
+						'x-frame-options': 'deny',
+					},
+				});
+			},
+		});
+		const response = await worker.fetch(new Request('https://cs.itkdm.com/activate/'), env, {});
+
+		assert.equal(response.status, 200);
+		assert.equal(await response.text(), 'https://raw.example.com/site/activate/index.html');
+		assert.equal(response.headers.get('content-type'), 'text/html; charset=utf-8');
+		assert.equal(response.headers.has('content-security-policy'), false);
+		assert.equal(response.headers.has('x-frame-options'), false);
 	});
 
 	it('proxies extension assets from an origin without index rewriting', async () => {

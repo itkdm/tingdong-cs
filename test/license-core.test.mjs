@@ -17,6 +17,7 @@ describe('license access core', () => {
 
 	it('protects learning detail pages but leaves the learning catalog public', () => {
 		assert.equal(isProtectedPath('/learn/'), false);
+		assert.equal(isProtectedPath('/learn/index.html'), false);
 		assert.equal(isProtectedPath('/learn'), false);
 		assert.equal(isProtectedPath('/learn/2026-05-19-kyxsan-falcons-response/'), true);
 		assert.equal(isProtectedPath('/about/'), false);
