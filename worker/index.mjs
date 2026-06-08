@@ -40,18 +40,60 @@ export default {
 	},
 };
 
-function fetchStaticAsset(request, env) {
+async function fetchStaticAsset(request, env) {
 	if (env.ASSETS) {
 		return env.ASSETS.fetch(request);
 	}
 
-	const target = new URL(request.url);
 	const origin = new URL(env.ORIGIN_URL);
-	target.protocol = origin.protocol;
-	target.hostname = origin.hostname;
-	target.port = origin.port;
+	const requestUrl = new URL(request.url);
+	const originPath = origin.pathname.replace(/\/$/, '');
+	const assetPath = resolveAssetPath(requestUrl.pathname);
+	const target = new URL(`${originPath}${assetPath}${requestUrl.search}`, origin);
 
-	return (env.originFetch ?? fetch)(new Request(target, request));
+	const response = await (env.originFetch ?? fetch)(new Request(target, request));
+	return withStaticContentType(response, assetPath);
+}
+
+function resolveAssetPath(pathname) {
+	if (pathname.endsWith('/')) {
+		return `${pathname}index.html`;
+	}
+
+	if (!pathname.split('/').at(-1)?.includes('.')) {
+		return `${pathname}/index.html`;
+	}
+
+	return pathname;
+}
+
+function withStaticContentType(response, assetPath) {
+	const headers = new Headers(response.headers);
+	const contentType = getContentType(assetPath);
+
+	if (contentType) {
+		headers.set('content-type', contentType);
+	}
+
+	return new Response(response.body, {
+		status: response.status,
+		statusText: response.statusText,
+		headers,
+	});
+}
+
+function getContentType(assetPath) {
+	if (assetPath.endsWith('.html')) return 'text/html; charset=utf-8';
+	if (assetPath.endsWith('.css')) return 'text/css; charset=utf-8';
+	if (assetPath.endsWith('.js')) return 'application/javascript; charset=utf-8';
+	if (assetPath.endsWith('.json')) return 'application/json; charset=utf-8';
+	if (assetPath.endsWith('.svg')) return 'image/svg+xml';
+	if (assetPath.endsWith('.png')) return 'image/png';
+	if (assetPath.endsWith('.jpg') || assetPath.endsWith('.jpeg')) return 'image/jpeg';
+	if (assetPath.endsWith('.ico')) return 'image/x-icon';
+	if (assetPath.endsWith('.xml')) return 'application/xml; charset=utf-8';
+	if (assetPath.endsWith('.txt')) return 'text/plain; charset=utf-8';
+	return undefined;
 }
 
 async function handleActivate(request, env) {

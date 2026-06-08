@@ -16,7 +16,7 @@ describe('license access worker routes', () => {
 	it('can proxy public pages from an origin when no assets binding is available', async () => {
 		const env = createEnv({
 			ASSETS: undefined,
-			ORIGIN_URL: 'https://origin.example.com',
+			ORIGIN_URL: 'https://raw.example.com/site',
 			originFetch(request) {
 				return new Response(new URL(request.url).href);
 			},
@@ -24,7 +24,23 @@ describe('license access worker routes', () => {
 		const response = await worker.fetch(new Request('https://cs.itkdm.com/about/'), env, {});
 
 		assert.equal(response.status, 200);
-		assert.equal(await response.text(), 'https://origin.example.com/about/');
+		assert.equal(await response.text(), 'https://raw.example.com/site/about/index.html');
+		assert.equal(response.headers.get('content-type'), 'text/html; charset=utf-8');
+	});
+
+	it('proxies extension assets from an origin without index rewriting', async () => {
+		const env = createEnv({
+			ASSETS: undefined,
+			ORIGIN_URL: 'https://raw.example.com/site',
+			originFetch(request) {
+				return new Response(new URL(request.url).href);
+			},
+		});
+		const response = await worker.fetch(new Request('https://cs.itkdm.com/_astro/app.abc123.js'), env, {});
+
+		assert.equal(response.status, 200);
+		assert.equal(await response.text(), 'https://raw.example.com/site/_astro/app.abc123.js');
+		assert.equal(response.headers.get('content-type'), 'application/javascript; charset=utf-8');
 	});
 
 	it('redirects protected learning detail pages to activation without a session', async () => {
